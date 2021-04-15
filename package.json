@@ -1,0 +1,11 @@
+{
+  "name": "discord-zehner-bot",
+  "version": "0.0.1",
+  "description": "discord bot automating zehner posting",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "lcberg",
+  "license": "MIT"
+}
