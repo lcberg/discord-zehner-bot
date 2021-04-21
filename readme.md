@@ -7,9 +7,9 @@ Dieser Zehner Bot postet auf Befehl einen Screenshot von dem Score des angefragt
 1. clone the repository
 2. run npm install
 3. create a .env file with 2 properties:
-    a) CHANNEL_ID=630859554904866856
-    b) DISCORD_TOKEN=xxxxxxx
-    (Get the Discord token from your bot in the Discord Dev Dashboard.)
+4. CHANNEL_ID=630859554904866856
+5. DISCORD_TOKEN=xxxxxxx
+(Get the Discord token from your bot in the Discord Dev Dashboard.)
 
 ## Usage
 
