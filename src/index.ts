@@ -76,15 +76,6 @@ async function getTableElement(name: string): Promise<playwright.ElementHandle<H
     
         await sleep(2000);
 
-        await page.screenshot({ path: 'test.png' });
-        const channel = client.channels.cache.get(process.env.CHANNEL_ID!);
-        if (channel?.isText()) channel.send('test', {
-            files: [
-                './test.png'
-            ]
-        })
-
-
         const element = await page.$(`td:has-text("${name}")`);
         const example_parent = (await element?.$('xpath=..'));
         
