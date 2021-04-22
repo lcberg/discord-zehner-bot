@@ -80,6 +80,8 @@ async function getTableElement(name: string): Promise<playwright.ElementHandle<H
         const example_parent = (await element?.$('xpath=..'));
         
         console.log('Done getting the element');
+
+        await browser.close();
     
         return example_parent!;
     } catch(error) {
