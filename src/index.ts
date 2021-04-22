@@ -1,5 +1,5 @@
 import playwright, { chromium } from 'playwright';
-import Discord from 'discord.js';
+import Discord, { TextChannel } from 'discord.js';
 import dotenv from 'dotenv';
 
 const send = true;
@@ -75,6 +75,16 @@ async function getTableElement(name: string): Promise<playwright.ElementHandle<H
         await page.click('.Button.MatchDetail .Off');
     
         await sleep(2000);
+
+        await page.screenshot({ path: 'test.png' });
+        const channel = client.channels.cache.get(process.env.CHANNEL_ID!);
+        if (channel?.isText()) channel.send('test', {
+            files: [
+                './test.png'
+            ]
+        })
+
+
         const element = await page.$(`td:has-text("${name}")`);
         const example_parent = (await element?.$('xpath=..'));
         
