@@ -63,7 +63,7 @@ function sleep (ms: number): Promise<void> {
 async function getTableElement(name: string): Promise<playwright.ElementHandle<HTMLElement | SVGElement>> {
     console.log('Fetching element...');
 
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({ chromiumSandbox: false });
     const page = await browser.newPage();
     await page.goto(`https://euw.op.gg/summoner/userName=${name}`);
     await page.click('button:has-text("ZUSTIMMEN")');
