@@ -21,6 +21,7 @@ client.on('message', async message => {
 
         if (name) {
             const elem = await getTableElement(name);
+            if (!elem) return;
             await elem.screenshot({ path: 'row.png', omitBackground: true });
 
             const score = await getScore(elem);
@@ -59,26 +60,31 @@ function sleep (ms: number): Promise<void> {
     });
 }
 
-async function getTableElement(name: string): Promise<playwright.ElementHandle<HTMLElement | SVGElement>> {
-    console.log('Fetching element...');
-
-    const browser = await chromium.launch({ chromiumSandbox: false });
-    const page = await browser.newPage();
-    await page.goto(`https://euw.op.gg/summoner/userName=${name}`);
-    await page.click('button:has-text("ZUSTIMMEN")');
-    await page.click('#SummonerRefreshButton');
-
-    await sleep(3000);
-
-    await page.click('.Button.MatchDetail .Off');
-
-    await sleep(2000);
-    const element = await page.$(`td:has-text("${name}")`);
-    const example_parent = (await element?.$('xpath=..'));
+async function getTableElement(name: string): Promise<playwright.ElementHandle<HTMLElement | SVGElement> | null> {
+    try {
+        console.log('Fetching element...');
     
-    console.log('Done getting the element');
-
-    return example_parent!;
+        const browser = await chromium.launch({ chromiumSandbox: false });
+        const page = await browser.newPage({ extraHTTPHeaders: { 'Accept-Language': 'de-De' }});
+        await page.goto(`https://euw.op.gg/summoner/userName=${name}`);
+        await page.click('button:has-text("ZUSTIMMEN")');
+        await page.click('#SummonerRefreshButton');
+    
+        await sleep(3000);
+    
+        await page.click('.Button.MatchDetail .Off');
+    
+        await sleep(2000);
+        const element = await page.$(`td:has-text("${name}")`);
+        const example_parent = (await element?.$('xpath=..'));
+        
+        console.log('Done getting the element');
+    
+        return example_parent!;
+    } catch(error) {
+        console.log(error);
+        return null;
+    }
 }
 
 async function getScore(elem: playwright.ElementHandle<HTMLElement | SVGElement>): Promise<string> {
