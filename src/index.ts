@@ -123,7 +123,10 @@ async function makeScreenshot(name: string) {
 
     const browser = await chromium.launch();
     const page = await browser.newPage();
-    await page.goto(`https://euw.op.gg/summoner/userName=${name}`);
+
+    const urlName = name.replaceAll(' ', '+');
+
+    await page.goto(`https://euw.op.gg/summoner/userName=${urlName}`);
     await page.click('button:has-text("ZUSTIMMEN")');
     await page.click('#SummonerRefreshButton');
 
