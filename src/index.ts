@@ -79,6 +79,7 @@ async function getTableElement(name: string): Promise<playwright.ElementHandle<H
         const example_parent = (await element?.$('xpath=..'));
         
         console.log('Done getting the element');
+        console.log(example_parent);
     
         return example_parent!;
     } catch(error) {
