@@ -4,6 +4,7 @@
   "description": "discord bot automating zehner posting",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest",
     "start": "node build/index.js",
     "dev": "ts-node src/index.ts",
