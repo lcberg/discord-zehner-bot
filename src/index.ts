@@ -3,7 +3,6 @@ import Discord from 'discord.js';
 import dotenv from 'dotenv';
 
 const send = true;
-
 dotenv.config();
 
 const client = new Discord.Client();
