@@ -108,3 +108,5 @@ async function isZehner(elem: playwright.ElementHandle<HTMLElement | SVGElement>
     }
     return false;
 }
+
+init();
