@@ -1,5 +1,6 @@
 node_modules
 .env
+.env.development
 package-log.json
 build
 row.png
