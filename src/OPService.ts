@@ -20,9 +20,9 @@ export default class OPService {
         const page = await this.browser!.newPage({ extraHTTPHeaders: { 'Accept-Language': 'de-De' }});
             await page.goto(`https://euw.op.gg/summoner/userName=${name}`);
         await page.click('button:has-text("ZUSTIMMEN")');
-        //await page.click('#SummonerRefreshButton');
+        await page.click('#SummonerRefreshButton');
     
-        //await sleep(3000);
+        await sleep(3000);
     
         await page.click('.Button.MatchDetail .Off');
     

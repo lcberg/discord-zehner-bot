@@ -10,6 +10,7 @@ export class DiscordUser {
     @Column()
     name!: string;   
 
+    //TODO: implement logic
     @OneToMany(() => GameStats, gamestats => gamestats.requestedBy)
     gamesRequested!: Array<GameStats>;
 

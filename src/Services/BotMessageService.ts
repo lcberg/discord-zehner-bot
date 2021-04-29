@@ -1,14 +1,16 @@
 import Discord from 'discord.js';
 import { getConnection, getCustomRepository } from 'typeorm';
-import gameListener from '../betting/GameManager';
+import gameListener from '../Features/betting/GameManager';
 import { DiscordUserRepository } from '../database/repositories/DiscordUserRepository';
+import RequestManager from '../Features/Requests/RequestManager';
 
 export default class BotMessageService {
     private client: Discord.Client;
+    private RequestManager: RequestManager;
 
     constructor() {
         this.client = new Discord.Client();
-        console.log(process.env.DISCORD_TOKEN);
+        this.RequestManager = new RequestManager();
         //this.client.login(process.env.DISCORD_TOKEN).then(() => console.log('client ready'));
     }
 
@@ -34,11 +36,8 @@ export default class BotMessageService {
                         await repo.createAndSave(message.author.id, message.author.username);
                         message.react('✅');
                     } else message.reply('Atze du bist schon registriert...');
-                } else if (content === 'points') {
-                    const user = await repo.findOne(message.author.id);
-                    if (user) {
-                        await message.reply(`Du hast momentan ${user.points} Punkte.`);
-                    }
+                } else if (content.startsWith('points')) {
+                    await this.RequestManager.pointRequest(message);
                 }
 
 
