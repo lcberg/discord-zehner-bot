@@ -1,4 +1,4 @@
-import { OpWebsiteGameStats, OpWebsiteScore } from "../OPService";
+import { OpWebsiteGameStats, OpWebsiteScore } from "../../OPService";
 
 export function createTestGame(): OpWebsiteGameStats {
     const opScores: Array<OpWebsiteScore> = [
