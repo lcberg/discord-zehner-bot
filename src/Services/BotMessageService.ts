@@ -22,7 +22,7 @@ export default class BotMessageService {
             console.log('message received');
 
             if (message.content.toLocaleLowerCase().includes('franz')) await message.reply('kleiner schwanz :)');
-            if (message.content.toLocaleLowerCase().includes('swift')) await message.reply('sogar Java ist besser als swift.');
+            if (message.content.toLocaleLowerCase().includes('swift')) await message.reply('sogar Java ist besser als die Shit Sprache.');
 
             if (message.channel.id === process.env.CHANNEL_ID && message.content.startsWith('!zehner')) {
                 const content = message.content.replace('!zehner', '').trim();
