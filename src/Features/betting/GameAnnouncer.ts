@@ -1,4 +1,4 @@
-import { OpWebsiteGameStats, OpWebsiteScore } from "../OPService";
+import { OpWebsiteGameStats, OpWebsiteScore } from "../../OPService";
 import Discord from 'discord.js';
 
 export function sendBettingMessage(channel: Discord.TextChannel, gameStats: OpWebsiteGameStats) {
@@ -28,7 +28,7 @@ export async function addBettingReactions(message: Discord.Message, emojis: Arra
 export function addGameScoresToBettingMessage(message: Discord.Message, gameStats: OpWebsiteGameStats) {
     let result = 'Results\n';
     for (let i = 0; i <= 9; i++) {
-        result += rowPrefix(gameStats.OpScores[i], i) + `${gameStats!.OpScores[i].name} - Platz: ${gameStats!.OpScores[i].place} - Score: ${gameStats!.OpScores[i].score}`;
+        result += rowPrefix(gameStats.OpScores[i], i) + `${gameStats!.OpScores[i].name} - Platz: ${gameStats!.OpScores[i].place} - Score: ${gameStats!.OpScores[i].score}\n`;
     }
 
     return message.edit(result);
