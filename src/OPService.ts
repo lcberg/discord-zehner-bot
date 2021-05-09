@@ -42,12 +42,17 @@ export default class OPService {
             const nameElement = await row.$$('.SummonerName.Cell a');
             const scoreElement = await row.$$('.OPScore.Text');
             const placeElement = await row.$$('.OPScore.Badge');
+            const championElement = await row.$$('.ChampionImage.Cell div');
+            const damageElement = await row.$$('.Damage.Cell .ChampionDamage');
             
+
             const nameText = await nameElement[0].textContent();
             const scoreText = await scoreElement[0].textContent();
             let placeText = await placeElement[0].textContent();
+            const championText = await championElement[0].textContent();
+            let damageText = await damageElement[0].textContent();
 
-            if (!nameText || !scoreText || !placeText) throw new Error ('could not find user elements for row');
+            if (!nameText || !scoreText || !placeText || !championText || !damageText) throw new Error ('could not find user elements for row');
 
             let place = 0;
             placeText = placeText?.replace('th', '');
@@ -65,7 +70,10 @@ export default class OPService {
             const temp = Number(scoreText);
             if (isNaN(temp)) throw new Error('Could not convert score');
 
-            scores.push(new OpWebsiteScore(nameText, placeText, place, temp));
+            damageText = damageText.replace(',', '');
+            const numberDamage = Number(damageText);
+
+            scores.push(new OpWebsiteScore(nameText, placeText, place, temp, championText, numberDamage));
         }
 
         const places = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -99,7 +107,9 @@ export class OpWebsiteScore {
         public name: string,
         public placeText: string,
         public place: number,
-        public score: number
+        public score: number,
+        public champion: string,
+        public damage: number
     ) {
 
     }

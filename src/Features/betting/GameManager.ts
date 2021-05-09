@@ -165,6 +165,6 @@ async function saveGameToDatabase(gameStats: OpWebsiteGameStats) {
     dbGameScores.forEach(s => s.gameStats = dbGameStats);
     await gameStatsRepo.addGame(dbGameStats);
     for (const opScore of gameStats.OpScores) {
-        await opScoreRepo.createAndSave(gameStats.gameId, opScore.name, opScore.score, opScore.place);
+        await opScoreRepo.createAndSave(gameStats.gameId, opScore.name, opScore.score, opScore.place, opScore.champion, opScore.damage);
     }
 }

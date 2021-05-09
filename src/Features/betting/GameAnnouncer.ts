@@ -28,16 +28,16 @@ export async function addBettingReactions(message: Discord.Message, emojis: Arra
 export function addGameScoresToBettingMessage(message: Discord.Message, gameStats: OpWebsiteGameStats) {
     let result = 'Results\n';
     for (let i = 0; i <= 9; i++) {
-        result += rowPrefix(gameStats.OpScores[i], i) + `${gameStats!.OpScores[i].name} - Platz: ${gameStats!.OpScores[i].place} - Score: ${gameStats!.OpScores[i].score}\n`;
+        result += rowPrefix(gameStats.OpScores[i], i) + `${gameStats!.OpScores[i].name} - ${gameStats!.OpScores[i].champion} - ${gameStats!.OpScores[i].place} (${gameStats!.OpScores[i].score})\n`;
     }
 
     return message.edit(result);
 }
 
 function rowPrefix(opScore: OpWebsiteScore, index: number): string {
-    if (opScore.place === 10) return '👨‍🦽)';
-    else if (opScore.place === 1) return '🥇)';
-    else if (opScore.place === 2) return '🥈';
-    else if (opScore.place === 3) return '🥉)';
-    else return `${index})`;
+    if (opScore.place === 10) return '👨‍🦽) ';
+    else if (opScore.place === 1) return '🥇) ';
+    else if (opScore.place === 2) return '🥈) ';
+    else if (opScore.place === 3) return '🥉) ';
+    else return `${index + 1}) `;
 }
