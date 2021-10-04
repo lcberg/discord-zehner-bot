@@ -19,10 +19,7 @@ import * as dotenv from 'dotenv';
     dotenv.config({ path: path });
 
     console.log('Finished env setup');
-    console.log(process.env.DISCORD_TOKEN);
-    console.log(process.env.DATABASE_DATABASE);
 
 export const TEST = process.env.DATABASE_HOST;
-
 
 export default this;

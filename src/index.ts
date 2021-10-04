@@ -7,13 +7,11 @@ import BotMessageService from './Services/BotMessageService';
 
 const send = true;
 
-
 async function init() {
     const connection = await createConnection();
     
     const bms = new BotMessageService();
-    bms.registerMessageHandlers();
-    
+    bms.registerMessageHandlers();   
 }
 
 init();

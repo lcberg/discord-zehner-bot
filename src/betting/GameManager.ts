@@ -1,16 +1,15 @@
 import Discord from 'discord.js';
-import { create } from 'domain';
-import { createConnection, getConnection, getCustomRepository } from 'typeorm';
+import { getConnection, getCustomRepository } from 'typeorm';
 import { DiscordUserRepository } from '../database/repositories/DiscordUserRepository';
 import { GameStatsRepository } from '../database/repositories/GameStatsRepository';
 import { OpScoreRepository } from '../database/repositories/OpScoreRepository';
-import { DiscordUser } from '../models/DiscordUser';
 import { GameStats } from '../models/GameStats';
 import { OpScore } from '../models/OpScore';
-import { ZehnerVote } from '../models/ZehnerVote';
 import OPService, { OpWebsiteGameStats, OpWebsiteScore } from '../OPService';
 
 let betsRunning = false;
+
+const opService = new OPService();
 
 async function gameListner (message: Discord.Message, client: Discord.Client) {
     if (betsRunning) {
@@ -46,8 +45,6 @@ async function gameListner (message: Discord.Message, client: Discord.Client) {
             }
 
         } else {
-            const opService = new OPService();
-            await opService.setup();
             gameStats = await opService.getUserScores(name);
             // save game stats to database
             // convert to database gamestats first

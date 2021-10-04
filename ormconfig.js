@@ -4,6 +4,8 @@ const rootDir = process.env.NODE_ENV === 'development' || process.env.NODE_ENV =
 
 const entitiesDir = __dirname + rootDir + '/models/**/*{.js,.ts}';
 
+console.log(`env ${process.env.NODE_ENV}`);
+console.log(`Rootdir ${rootDir}`);
 console.log(`entities ${entitiesDir}`);
 
 if(process.env.NODE_ENV === 'development') {

@@ -19,7 +19,7 @@ export default class BotMessageService {
         const repo = getCustomRepository(DiscordUserRepository);
 
         this.client.on('message', async message => {
-            console.log('message received');
+            console.log(`message received: ${message.cleanContent}`);
 
             if (message.content.toLocaleLowerCase().includes('franz')) await message.reply('kleiner schwanz :)');
             if (message.content.toLocaleLowerCase().includes('swift')) await message.reply('sogar Java ist besser als die Shit Sprache.');
@@ -41,6 +41,10 @@ export default class BotMessageService {
                     } else message.reply('Atze du bist schon registriert...');
                 } else if (content.startsWith('points')) {
                     await this.RequestManager.pointRequest(message);
+                } else if (content.startsWith('mute')) {
+                    await this.RequestManager.muteRequest(message);
+                } else {
+                    console.log('No handler specified');
                 }
 
 

@@ -20,10 +20,19 @@ export class DiscordUserRepository extends Repository<DiscordUser> {
 
     async awardPoints(discordUserId: string, points: number) {
         const user = await this.findOne(discordUserId);
-        if (user) {
+        if (user) {
             // have to overwrite since user.points is a string
             const userPoints = Number(user.points);
             user.points = userPoints + points;
+            return this.manager.save(user);
+        }
+    }
+
+    async deductPoints (discordUserId: string, points: number) {
+        const user = await this.findOne(discordUserId);
+        if (user) {
+            const userPoints = Number(user.points);
+            user.points = userPoints - points;
             return this.manager.save(user);
         }
     }
