@@ -43,7 +43,11 @@ export default class RequestManager {
         if (tokens.length != 2) return await message.reply('Falsches Format. !zehner mute @der echte nini 10.');
         const stringDuration = tokens[1].trim();
         const duration = Number(stringDuration);
-        const cost = duration * 10;
+        let cost = duration * 10;
+
+        // Eiszapfen
+        if (target.user.id === '259390262160261120') cost = cost / 2;
+        
         if (Number.isNaN(duration)) return await message.reply('Zeitangabe ungültig.');
 
         const userPoints = Number(user.points);
